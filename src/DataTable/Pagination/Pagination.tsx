@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, SyntheticEvent } from 'react';
 
 import { Page } from '../Page/Page';
 
@@ -10,7 +10,17 @@ export interface IPaginationProps {
 
 export const Pagination: FC<IPaginationProps> = ({ currentPageNumber, totalNumberOfPages, onChange }) => {
   const pages = Array.from(Array(totalNumberOfPages).keys()).map(pageNumber => {
-    return <Page key={pageNumber} currentPageNumber={currentPageNumber} pageNumber={pageNumber} onChange={onChange} />;
+    return (
+      <Page
+        key={pageNumber}
+        pageNumber={pageNumber}
+        isSelected={currentPageNumber === pageNumber}
+        onChange={(event: SyntheticEvent<HTMLButtonElement>) => {
+          event.preventDefault();
+          onChange(pageNumber);
+        }}
+      />
+    );
   });
 
   if (pages.length <= 1) {
