@@ -1,6 +1,6 @@
 import React, { FC, SyntheticEvent } from 'react';
 
-import { PaginationItem } from './PaginationItem/Page';
+import { PaginationItem } from './PaginationItem/PaginationItem';
 
 export interface IPaginationProps {
   currentPageNumber: number;
@@ -8,24 +8,28 @@ export interface IPaginationProps {
   onChange: (pageNumber: number) => void;
 }
 
-export const Pagination: FC<IPaginationProps> = ({ currentPageNumber, totalNumberOfPages, onChange }) => {
-  const pages = Array.from(Array(totalNumberOfPages).keys()).map(pageNumber => {
-    return (
-      <PaginationItem
-        key={pageNumber}
-        pageNumber={pageNumber}
-        isSelected={currentPageNumber === pageNumber}
-        onChange={(event: SyntheticEvent<HTMLButtonElement>) => {
-          event.preventDefault();
-          onChange(pageNumber);
-        }}
-      />
-    );
-  });
+const createKeyArray = (amount: number): number[] => Array.from(Array(amount).keys());
 
-  if (pages.length <= 1) {
+export const Pagination: FC<IPaginationProps> = ({ currentPageNumber, totalNumberOfPages, onChange }) => {
+  if (totalNumberOfPages === 0) {
     return null;
   }
 
-  return <ul className="pagination">{pages}</ul>;
+  const pages = createKeyArray(totalNumberOfPages);
+
+  return (
+    <ul className="pagination">
+      {pages.map(pageNumber => (
+        <PaginationItem
+          key={pageNumber}
+          pageNumber={pageNumber}
+          isSelected={currentPageNumber === pageNumber}
+          onChange={(event: SyntheticEvent<HTMLButtonElement>) => {
+            event.preventDefault();
+            onChange(pageNumber);
+          }}
+        />
+      ))}
+    </ul>
+  );
 };
