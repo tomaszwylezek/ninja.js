@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useMemo, useState } from 'react';
+import React, { FC, SyntheticEvent, useMemo, useState, useCallback } from 'react';
 
 import { IRow } from '../models';
 
@@ -17,9 +17,12 @@ export const DataTable: FC<IDataTableProps> = ({ rows, rowsPerPage = 50 }) => {
 
   const lowerCasedSearch = search.toLowerCase();
 
-  const containSearch = (value: string) => {
-    return value.toLowerCase().includes(lowerCasedSearch);
-  };
+  const containSearch = useCallback(
+    (value: string) => {
+      return value.toLowerCase().includes(lowerCasedSearch);
+    },
+    [lowerCasedSearch]
+  );
 
   const filteredRows = useMemo(() => rows.filter(row => containSearch(row.name1) || containSearch(row.email)), [
     rows,
@@ -37,6 +40,7 @@ export const DataTable: FC<IDataTableProps> = ({ rows, rowsPerPage = 50 }) => {
       <Search
         value={search}
         handleChange={(event: SyntheticEvent<HTMLInputElement>) => {
+          console.log(event.currentTarget.value, 'event');
           setSearch(event.currentTarget.value);
         }}
       />
