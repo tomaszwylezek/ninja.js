@@ -1,13 +1,13 @@
 import React, { FC, SyntheticEvent } from 'react';
 import cn from 'classnames';
 
-export interface IPageProps {
+export interface IPaginationItemProps {
   pageNumber: number;
   isSelected: boolean;
   onChange: (event: SyntheticEvent<HTMLButtonElement>) => void;
 }
 
-export const Page: FC<IPageProps> = ({ pageNumber, isSelected, onChange }) => {
+export const PaginationItem: FC<IPaginationItemProps> = ({ pageNumber, isSelected, onChange }) => {
   return (
     <li className="page-item mr-1">
       <button

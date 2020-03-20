@@ -1,6 +1,6 @@
 import React, { FC, SyntheticEvent } from 'react';
 
-import { Page } from '../Page/Page';
+import { PaginationItem } from './PaginationItem/Page';
 
 export interface IPaginationProps {
   currentPageNumber: number;
@@ -11,7 +11,7 @@ export interface IPaginationProps {
 export const Pagination: FC<IPaginationProps> = ({ currentPageNumber, totalNumberOfPages, onChange }) => {
   const pages = Array.from(Array(totalNumberOfPages).keys()).map(pageNumber => {
     return (
-      <Page
+      <PaginationItem
         key={pageNumber}
         pageNumber={pageNumber}
         isSelected={currentPageNumber === pageNumber}
