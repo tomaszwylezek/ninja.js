@@ -44,20 +44,19 @@ export const DataTable: FC<IDataTableProps> = ({ rows, rowsPerPage = 50 }) => {
         }}
       />
 
-      {!!rowsToRender.length && (
-        <>
-          <table>
-            <tbody>{rowsToRender}</tbody>
-          </table>
-          <Pagination
-            currentPageNumber={currentPageNumber}
-            totalNumberOfPages={totalNumberOfPages}
-            onChange={setCurrentPageNumber}
-          />
-        </>
+      {rowsToRender.length ? (
+        <table>
+          <tbody>{rowsToRender}</tbody>
+        </table>
+      ) : (
+        <p>Nothing has been found</p>
       )}
 
-      {rowsToRender.length === 0 && <p>Nothing has been found</p>}
+      <Pagination
+        currentPageNumber={currentPageNumber}
+        totalNumberOfPages={totalNumberOfPages}
+        onChange={setCurrentPageNumber}
+      />
     </div>
   );
 };
