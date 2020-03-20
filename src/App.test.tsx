@@ -1,54 +1,40 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { App } from './App';
+import { App, IAppProps } from './App';
 
-const rows = [
-  {
-    name1: 'Mads L. Klausen',
-    email: 'MadsLKlausen@jourrapide.com',
-    edit_path: 'http://google.com',
-    per_id: 1
-  },
-  {
-    name1: 'Alfred K. Krogh',
-    email: 'AlfredKKrogh@armyspy.com',
-    edit_path: 'http://google.com',
-    per_id: 2
-  },
-  {
-    name1: 'Silas L. Bertelsen',
-    email: 'SilasLBertelsen@armyspy.com',
-    edit_path: 'http://google.com',
-    per_id: 3
-  },
-  {
-    name1: 'Mia A. Johnsen',
-    email: 'MiaAJohnsen@dayrep.com',
-    edit_path: 'http://google.com',
-    per_id: 4
-  },
-  {
-    name1: 'Alfred S. Schou',
-    email: 'AlfredSSchou@jourrapide.com',
-    edit_path: 'http://google.com',
-    per_id: 5
-  }
-];
+import { getRows } from './mocks';
 
-it('renders without crashing', () => {
-  shallow(<App rows={[]} />);
-});
+describe('App', () => {
+  let props: IAppProps;
 
-it('renders 5 rows', () => {
-  const wrapper = mount(<App rows={rows} />);
+  beforeEach(() => {
+    props = {
+      rows: getRows()
+    };
+  });
 
-  expect(wrapper.find('tr').length).toBe(5);
-});
+  it('renders without crashing', () => {
+    props.rows = [];
+    shallow(<App {...props} />);
+  });
 
-it('filters rows based on input', () => {
-  const wrapper = mount(<App rows={rows} />);
+  it('renders 5 rows', () => {
+    const wrapper = mount(<App {...props} />);
 
-  wrapper.find('input').simulate('change', { target: { value: 'k' } });
+    expect(wrapper.find('tr').length).toBe(5);
+  });
 
-  expect(wrapper.find('tr').length).toBe(2);
+  it('filters rows based on input', () => {
+    const wrapper = mount(<App {...props} />);
+
+    const attribute = document.createAttribute('value');
+    attribute.value = 'k';
+
+    const input = wrapper.find('input');
+    input.getDOMNode().setAttributeNode(attribute);
+
+    input.simulate('change');
+
+    expect(wrapper.find('tr').length).toBe(2);
+  });
 });

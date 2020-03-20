@@ -40,7 +40,6 @@ export const DataTable: FC<IDataTableProps> = ({ rows, rowsPerPage = 50 }) => {
       <Search
         value={search}
         handleChange={(event: SyntheticEvent<HTMLInputElement>) => {
-          console.log(event.currentTarget.value, 'event');
           setSearch(event.currentTarget.value);
         }}
       />
