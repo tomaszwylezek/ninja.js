@@ -17,17 +17,20 @@ export const DataTable: FC<IDataTableProps> = ({ rows, rowsPerPage = 50 }) => {
 
   const lowerCasedSearch = search.toLowerCase();
 
-  const filteredRows = useMemo(() => {
-    return rows.filter(row => {
-      return row.name1.toLowerCase().includes(lowerCasedSearch) || row.email.toLowerCase().includes(lowerCasedSearch);
-    });
-  }, [rows, search]);
+  const containSearch = (value: string) => {
+    return value.toLowerCase().includes(lowerCasedSearch);
+  };
+
+  const filteredRows = useMemo(() => rows.filter(row => containSearch(row.name1) || containSearch(row.email)), [
+    rows,
+    search
+  ]);
 
   const totalNumberOfPages = rowsPerPage === 0 ? 0 : Math.ceil(filteredRows.length / rowsPerPage);
 
   const rowsToRender = filteredRows
-    .map((row: any) => <Row key={row.per_id} row={row} />)
-    .slice(startIndex, startIndex + rowsPerPage);
+    .slice(startIndex, startIndex + rowsPerPage)
+    .map(row => <Row key={row.per_id} row={row} />);
 
   return (
     <div>
@@ -37,14 +40,21 @@ export const DataTable: FC<IDataTableProps> = ({ rows, rowsPerPage = 50 }) => {
           setSearch(event.currentTarget.value);
         }}
       />
-      <table>
-        <tbody>{rowsToRender}</tbody>
-      </table>
-      <Pagination
-        currentPageNumber={currentPageNumber}
-        totalNumberOfPages={totalNumberOfPages}
-        onChange={setCurrentPageNumber}
-      />
+
+      {!!rowsToRender.length && (
+        <>
+          <table>
+            <tbody>{rowsToRender}</tbody>
+          </table>
+          <Pagination
+            currentPageNumber={currentPageNumber}
+            totalNumberOfPages={totalNumberOfPages}
+            onChange={setCurrentPageNumber}
+          />
+        </>
+      )}
+
+      {rowsToRender.length === 0 && <p>Nothing has been found</p>}
     </div>
   );
 };
