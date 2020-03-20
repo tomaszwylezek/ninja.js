@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
+import cn from 'classnames';
 
 export interface IPageProps {
   pageNumber: any;
@@ -6,9 +7,7 @@ export interface IPageProps {
   onChange: any;
 }
 
-const Page: FC<IPageProps> = props => {
-  const { pageNumber, currentPageNumber, onChange } = props;
-
+export const Page: FC<IPageProps> = ({ pageNumber, currentPageNumber, onChange }) => {
   const isActivePage = () => {
     return currentPageNumber === pageNumber;
   };
@@ -33,11 +32,14 @@ const Page: FC<IPageProps> = props => {
   }
   return (
     <li className="page-item mr-1">
-      <button className="page-link" onClick={click}>
+      <button
+        className={cn('page-link', {
+          'button-outline': currentPageNumber === pageNumber
+        })}
+        onClick={click}
+      >
         {renderedPageNumber()}
       </button>
     </li>
   );
 };
-
-export default Page;

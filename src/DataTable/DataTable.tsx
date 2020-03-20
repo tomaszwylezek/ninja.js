@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import Pagination from "./Pagination";
-import Row from "./Row";
-import Search from "./Search";
+import { IRow } from '../models';
+
+import { Pagination } from './Pagination/Pagination';
+import { Row } from './Row/Row';
+import { Search } from './Search/Search';
 
 export interface IDataTableProps {
-  rows: any;
-  locale: string;
+  rows: IRow[];
   rowsPerPage: number;
 }
 
@@ -16,7 +17,7 @@ export interface IDataTableState {
   totalNumberOfPages: number;
 }
 
-class DataTable extends React.Component<IDataTableProps, IDataTableState> {
+export class DataTable extends React.Component<IDataTableProps, IDataTableState> {
   state = {
     rows: this.props.rows,
     currentPageNumber: 0,
@@ -85,5 +86,3 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState> {
     );
   }
 }
-
-export default DataTable;
