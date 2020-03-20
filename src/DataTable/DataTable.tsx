@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useMemo, useState, useCallback } from 'react';
+import React, { FC, SyntheticEvent, useMemo, useState, useCallback, useEffect } from 'react';
 
 import { IRow } from '../models';
 
@@ -28,6 +28,13 @@ export const DataTable: FC<IDataTableProps> = ({ rows, rowsPerPage = 50 }) => {
     containSearch,
     rows
   ]);
+
+  useEffect(() => {
+    const maxPageToDisplay = Math.floor(filteredRows.length / 5);
+    if (currentPageNumber > maxPageToDisplay) {
+      setCurrentPageNumber(maxPageToDisplay);
+    }
+  }, [filteredRows, currentPageNumber]);
 
   const totalNumberOfPages = rowsPerPage === 0 ? 0 : Math.ceil(filteredRows.length / rowsPerPage);
 
