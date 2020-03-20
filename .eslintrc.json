@@ -36,5 +36,15 @@
   "globals": {
     "require": true,
     "it": true
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }
