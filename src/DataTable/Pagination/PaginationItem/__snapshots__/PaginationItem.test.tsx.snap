@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IPaginationItemProps renders without crashing 1`] = `
+<li
+  className="page-item mr-1"
+>
+  <button
+    className="page-link"
+    onClick={[MockFunction]}
+  >
+    1
+  </button>
+</li>
+`;

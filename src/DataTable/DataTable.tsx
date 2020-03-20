@@ -25,8 +25,8 @@ export const DataTable: FC<IDataTableProps> = ({ rows, rowsPerPage = 50 }) => {
   );
 
   const filteredRows = useMemo(() => rows.filter(row => containSearch(row.name1) || containSearch(row.email)), [
-    rows,
-    search
+    containSearch,
+    rows
   ]);
 
   const totalNumberOfPages = rowsPerPage === 0 ? 0 : Math.ceil(filteredRows.length / rowsPerPage);
