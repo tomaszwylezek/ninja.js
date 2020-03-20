@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ISearchProps renders without crashing 1`] = `
+<div
+  className="p-b-1"
+>
+  <input
+    className="form-control"
+    onChange={[MockFunction]}
+    placeholder="Søg brugere"
+    type="search"
+    value=""
+  />
+</div>
+`;
