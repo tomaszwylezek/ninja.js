@@ -30,5 +30,6 @@ export const getRows = (): IRow[] => [
     email: 'AlfredSSchou@jourrapide.com',
     edit_path: 'http://google.com',
     per_id: 5
-  }
+  },
+  { name1: 'Emilie T. Lassen', email: 'EmilieTLassen@rhyta.com', edit_path: 'http://google.com', per_id: 6 }
 ];

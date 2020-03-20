@@ -37,4 +37,15 @@ describe('App', () => {
 
     expect(wrapper.find('tr').length).toBe(2);
   });
+
+  it('display second page', () => {
+    const wrapper = mount(<App {...props} />);
+
+    wrapper
+      .find('button')
+      .at(1)
+      .simulate('click');
+
+    expect(wrapper.find('tr').length).toBe(1);
+  });
 });

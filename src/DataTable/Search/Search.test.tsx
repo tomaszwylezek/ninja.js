@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { Search, ISearchProps } from './Search';
 
-describe('ISearchProps', () => {
+describe('Search', () => {
   let props: ISearchProps;
 
   beforeEach(() => {

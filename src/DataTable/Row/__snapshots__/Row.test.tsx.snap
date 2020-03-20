@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Row renders without crashing 1`] = `
+<tr>
+  <td>
+    <a
+      href="http://google.com"
+    >
+      Mads L. Klausen
+    </a>
+    <br />
+    <small>
+      MadsLKlausen@jourrapide.com
+    </small>
+  </td>
+</tr>
+`;

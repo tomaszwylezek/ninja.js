@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { PaginationItem, IPaginationItemProps } from './PaginationItem';
 
-describe('IPaginationItemProps', () => {
+describe('PaginationItem', () => {
   let props: IPaginationItemProps;
 
   beforeEach(() => {
